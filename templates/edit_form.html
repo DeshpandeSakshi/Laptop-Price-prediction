@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Laptop Price Predictor</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .blue-navbar {
+      background-color: #007BFF;
+    }
+    .blue-navbar .nav-link:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+    }
+    .form-section {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body onload="displayUser();">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Predict Laptop Prices with Ease</h1>
+      <p class="lead">Get an accurate estimate of a laptop's price using our smart ML model. Just enter specs like CPU, RAM, and Storage!</p>
+    </div>
+  </section>
+
+  <!-- Blue Navigation Bar -->
+  <nav class="navbar navbar-expand-lg blue-navbar navbar-dark">
+    <div class="container-fluid">
+     
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="http://localhost:5000/ahome">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="http://localhost:5000/msg_list">QUERIES</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <span class="h5 mb-0 text-white" id="uname"></span>
+          <button class="btn btn-danger btn-sm" onclick="logout();">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Edit Contact Message Form -->
+  <div class="container form-section">
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white fw-bold">
+        Edit Contact Message
+      </div>
+      <div class="card-body">
+        <form action="/update_reply/{{ contact['cid'] }}" method="POST" class="needs-validation" novalidate>
+          <input type="hidden" id="cid" name="cid" value="{{ cid }}">
+
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" value="{{ contact['name'] }}" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" value="{{ contact['email'] }}" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea name="message" rows="4" class="form-control" readonly>{{ contact['message'] }}</textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Reply</label>
+            <textarea name="reply" rows="4" class="form-control" required>{{ contact['reply'] or '' }}</textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success">Submit Reply</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function displayUser() {
+      if (!sessionStorage["uname"]) {
+        location.href = "http://localhost:5000/";
+      } else {
+        document.getElementById("uname").innerText = sessionStorage["uname"];
+      }
+       alert("reply saved successfully");
+    }
+    function logout() {
+      sessionStorage.clear();
+      location.href = "http://localhost:5000/login";
+    }
+  </script>
+
+</body>
+</html>

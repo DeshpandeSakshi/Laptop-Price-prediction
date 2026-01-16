@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>laptop</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .blue-navbar {
+      background-color: #007BFF;
+    }
+    .hero {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+    }
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      margin: auto;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body onload="displayUser();">
+
+  <section class="hero">
+    <div class="container">
+      <h1 class="display-4">Predict Laptop Prices with Ease</h1>
+      <p class="lead">Get an accurate estimate of a laptop's price using our smart ML model. Just enter specs like CPU, RAM, and Storage!</p>
+    </div>
+  </section>
+
+  <!-- Blue Navigation Bar -->
+  <nav class="navbar navbar-expand-lg blue-navbar">
+    <div class="container-fluid">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/ahome">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/msg_list">QUERIES</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <span class="h5 mb-0 text-white" id="uname"></span>
+        <button class="btn btn-danger" onclick="logout();">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <h2 class="text-center mt-4">Contact Messages</h2>
+
+  <table class="table table-striped table-bordered mt-3" id="contact">
+    <tr>
+      <th>ID</th><th>Name</th><th>Email</th><th>Message</th><th>Action</th>
+    </tr>
+  </table>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function displayUser() {
+      if (!sessionStorage["uname"]) {
+        location.href = "http://localhost:5000/";
+      } else {
+        document.getElementById("uname").innerHTML = sessionStorage["uname"];
+      }
+      display();
+    }
+
+    async function display() {
+      let response = await fetch("http://localhost:5000/contacts_reply");
+      if (response.status == 200) {
+        let data = await response.json();
+        let output = ``;
+        for (let c of data) {
+          let btnClass = c.reply && c.reply.trim() !== "" ? "btn btn-success" : "btn btn-primary";
+          let btnText = c.reply && c.reply.trim() !== "" ? "Replied" : "Reply";
+
+          output += `
+            <tr>
+              <td>${c.cid}</td>
+              <td>${c.name}</td>
+              <td>${c.email}</td>
+              <td>${c.message}</td>
+              <td>
+                <button class="${btnClass}" onclick="location.href='http://localhost:5000/edit_form?cid=${c.cid}'">
+                  ${btnText}
+                </button>
+              </td>
+            </tr>
+          `;
+        }
+        document.getElementById("contact").innerHTML += output;
+      } else {
+        console.error("Error fetching contact messages:", response.status);
+      }
+    }
+
+    function logout() {
+      sessionStorage.clear();
+      location.href = "http://localhost:5000/login";
+    }
+  </script>
+</body>
+</html>

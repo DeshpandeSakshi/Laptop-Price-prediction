@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>laptop</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    
+
+    .blue-navbar {
+      background-color: #007BFF;
+      
+    }
+    .hero {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+   }
+
+
+   
+  
+  </style>
+</head>
+<body onload="displayUser();">
+
+   <section class="hero">
+  <div class="container">
+    <h1 class="display-4">Predict Laptop Prices with Ease</h1>
+    <p class="lead">Get an accurate estimate of a laptop's price using our smart ML model. Just enter specs like CPU, RAM, and Storage!</p>
+    </div>
+</section>
+
+  <!-- Blue Navigation Bar -->
+  <nav class="navbar navbar-expand-lg blue-navbar">
+    <div class="container-fluid">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/chome">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/msg_list">QUERIES</a>
+        </li>
+       
+        </ul>
+        <div class="row-0">
+        <div class="col-12"></div>
+        <div class="col-0">
+          <span class="h5" id="uname"></span>
+          <button class="btn btn-danger" type="submit" onclick="logout();">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+   
+
+  <h2 class="text-center mt-4">Customers enrolled</h2>
+
+  <table class="table table-striped table-bordered mt-3" id="customer">
+    <tr>
+      <th>ID</th><th>Name</th><th>Address</th><th>Gender</th><th>Mobile no</th>
+    </tr>
+  </table>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function displayUser() {
+      if (!sessionStorage["uname"]) {
+        location.href = "http://localhost:5000/";
+      } else {
+        document.getElementById("uname").innerHTML = sessionStorage["uname"];
+      }
+      display();
+    }
+
+    async function display() {
+      let response = await fetch("http://localhost:5000/ahome_display");
+      if (response.status == 200) {
+        let data = await response.json();
+        let output = ``;
+        for (let c of data) {
+          let btnClass = c.reply && c.reply.trim() !== "" ? "btn btn-success" : "btn btn-primary";
+          let btnText = c.reply && c.reply.trim() !== "" ? "Replied" : "Reply";
+
+          output += `
+            <tr>
+              <td>${c.cid}</td>
+              <td>${c.name}</td>
+              <td>${c.address}</td>
+              <td>${c.gender}</td>
+               <td>${c.mobileno}</td>
+              
+            </tr>
+          `;
+        }
+        document.getElementById("customer").innerHTML += output;
+      } else {
+        console.error("Error fetching contact messages:", response.status);
+      }
+    }
+
+    function logout() {
+      sessionStorage.clear();
+      location.href = "http://localhost:5000/login";
+    }
+  </script>
+</body>
+</html>
+

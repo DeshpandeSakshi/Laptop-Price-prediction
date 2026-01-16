@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Laptop Price Prediction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+
+    .hero {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+      
+    }
+
+    .blue-navbar {
+      
+      background-color: #007BFF;
+    }
+    body{
+      background-color: #f0f0f0;
+    }
+aa {
+      padding-top: 100px; /* Adjust for fixed navbar */
+      background-color: #010509;
+      color: aliceblue;
+      
+    }
+
+ p {
+      font-size: 18px;
+      margin: 20px auto;
+      width: 90%;
+      line-height: 1.6;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    table {
+      margin: 20px auto;
+      color: #e0d6d6f6;
+    }
+    
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Black Navbar with Marquee -->
+  <section class="hero">
+  <div class="container">
+    <h1 class="display-4">Predict Laptop Prices with Ease</h1>
+    <p class="lead">Get an accurate estimate of a laptop's price using our smart ML model. Just enter specs like CPU, RAM, and Storage!</p>
+    </div>
+</section>
+
+  <!-- Blue Navigation Bar -->
+  <nav class="navbar navbar-expand-lg blue-navbar">
+    <div class="container-fluid">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/about">ABOUT</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/login">LOGIN</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/register">REGISTER</a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+<div class="aa">  <!-- Paragraphs -->
+  <p>
+    In today's competitive market, predicting the price of laptops based on their specifications and trends is vital for both consumers and retailers. This project, <strong>LappyPricer</strong>, leverages data science techniques to develop a robust model capable of forecasting laptop prices using key features such as brand, processor type, RAM, storage, screen size, and other specifications.
+  </p>
+
+  <p>
+    The system utilizes a comprehensive dataset collected from various online retailers, which is then preprocessed and analyzed through exploratory data analysis (EDA) to uncover patterns and relationships between different features and pricing. By applying machine learning algorithms such as linear regression, decision trees, and random forest, the model aims to accurately predict laptop prices, enabling consumers to make informed purchasing decisions and retailers to optimize their pricing strategies.
+  </p>
+
+  <p>
+    In the modern digital age, laptops have become an essential tool for individuals and businesses alike. Accurate price forecasting based on laptop features can bridge the gap between consumer expectations and market trends. <strong>LappyPricer</strong> helps both consumers and sellers make better, data-driven decisions.
+  </p>
+  </div>
+
+
+  <!-- Table Title -->
+  <h2>Laptop Specifications</h2>
+
+  <!-- Laptop Table -->
+  <div class="container">
+    <table class="table table-bordered table-hover table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Laptop Name</th>
+          <th>Brand</th>
+          <th>Processor</th>
+          <th>CPU</th>
+          <th>RAM</th>
+          <th>Storage</th>
+          <th>Screen Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Inspiron 15</td>
+          <td>Dell</td>
+          <td>Intel Core i5</td>
+          <td>i5-1135G7</td>
+          <td>8 GB</td>
+          <td>512 GB SSD</td>
+          <td>15.6"</td>
+        </tr>
+        <tr>
+          <td>MacBook Air M2</td>
+          <td>Apple</td>
+          <td>Apple M2</td>
+          <td>M2 8-core</td>
+          <td>8 GB</td>
+          <td>256 GB SSD</td>
+          <td>13.6"</td>
+        </tr>
+        <tr>
+          <td>HP Pavilion 14</td>
+          <td>HP</td>
+          <td>Intel Core i7</td>
+          <td>i7-1255U</td>
+          <td>16 GB</td>
+          <td>1 TB SSD</td>
+          <td>14"</td>
+        </tr>
+        <tr>
+          <td>ThinkPad E14</td>
+          <td>Lenovo</td>
+          <td>AMD Ryzen 5</td>
+          <td>5500U</td>
+          <td>8 GB</td>
+          <td>512 GB SSD</td>
+          <td>14"</td>
+        </tr>
+        <tr>
+          <td>Aspire 7</td>
+          <td>Acer</td>
+          <td>AMD Ryzen 7</td>
+          <td>5800H</td>
+          <td>16 GB</td>
+          <td>512 GB SSD</td>
+          <td>15.6"</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

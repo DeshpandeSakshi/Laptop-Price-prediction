@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>laptop</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    
+
+    .blue-navbar {
+      background-color: #007BFF;
+      
+    }
+    .hero {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+   }
+
+ body {
+      background-color: #f0f8ff;
+    }
+    .brand-section {
+      padding: 30px;
+    }
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .brand-card {
+      text-align: center;
+      margin: 15px;
+    }
+    .brand-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .brand-card img:hover {
+      transform: scale(1.1);
+    }
+    .brand-name {
+      margin-top: 10px;
+      font-weight: 500;
+    }
+   
+  
+    .feature-section {
+      background-color: #fff6f6;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+    }
+    .feature-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .feature-card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 12px 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 12px;
+      min-width: 120px;
+    }
+    .feature-card:hover {
+      border-color: #007bff;
+      box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+      transform: translateY(-3px);
+    }
+    .feature-card a {
+      text-decoration: none;
+      display: block;
+    }
+    .feature-card a strong {
+      color: #007bff;
+      display: block;
+      font-size: 1rem;
+    }
+    .feature-card a span {
+      color: #333;
+      font-size: 0.85rem;
+    }
+
+    /* Make it scrollable on small screens */
+    .feature-scroll {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .feature-scroll::-webkit-scrollbar {
+      display: none;
+    }
+     .laptop-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    }
+    .laptop-card img {
+      width: 100%;
+      max-width: 220px;
+      border-radius: 5px;
+    }
+    .tag-upcoming {
+      background: #ff9800;
+      color: white;
+      font-size: 0.8rem;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .price {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #0a8f0a;
+    }
+    .spec-score {
+      background: #4caf50;
+      color: white;
+      font-size: 0.8rem;
+      padding: 3px 8px;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+    .features-list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.9rem;
+    }
+    .features-list li::before {
+      content: "✔ ";
+      color: #007bff;
+      font-weight: bold;
+    }
+    .actions button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body onload="displayUser();">
+
+   <section class="hero">
+  <div class="container">
+    <h1 class="display-4">Predict Laptop Prices with Ease</h1>
+    <p class="lead">Get an accurate estimate of a laptop's price using our smart ML model. Just enter specs like CPU, RAM, and Storage!</p>
+    </div>
+</section>
+
+  <!-- Blue Navigation Bar -->
+  <nav class="navbar navbar-expand-lg blue-navbar">
+    <div class="container-fluid">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/chome">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/index">PREDICT</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/contact">CONTACT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/messagelist">MESSAGE</a>
+        </li>
+        </ul>
+        <div class="row-0">
+        <div class="col-12"></div>
+        <div class="col-0">
+          <span class="h5" id="uname"></span>
+          <button class="btn btn-danger" type="submit" onclick="logout();">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+   
+
+  <div class="container brand-section">
+    <div class="brand-title">Popular Brands</div>
+    <div class="row justify-content-center">
+      <div class="col-auto brand-card">
+        <img src="{{ url_for('static', filename='lenovo.png') }}" alt="Lenovo">
+        <div class="brand-name">Lenovo</div>
+      </div>
+      <div class="col-auto brand-card">
+        <img src="{{ url_for('static', filename='hp.png') }}" alt="HP">
+        <div class="brand-name">HP</div>
+      </div>
+      <div class="col-auto brand-card">
+        <img src="{{ url_for('static', filename='asus.png') }}" alt="Asus">
+        <div class="brand-name">Asus</div>
+      </div>
+      <div class="col-auto brand-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg" alt="Dell">
+        <div class="brand-name">Dell</div>
+      </div>
+      <div class="col-auto brand-card">
+        <img src="{{ url_for('static', filename='aser.jpg') }}" alt="Acer">
+        <div class="brand-name">Acer</div>
+      </div>
+      
+      <div class="col-auto brand-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+        <div class="brand-name">Apple</div>
+      </div>
+     
+      
+    </div>
+    <div class="container feature-section">
+    <div class="feature-title">Most Searched Features</div>
+    <div class="feature-scroll">
+      <div class="feature-card">
+        <a href="#"><strong>Gaming</strong><span>Laptops</span></a>
+      </div>
+      <div class="feature-card">
+        <a href="#"><strong>Windows 11</strong><span></span></a>
+      </div>
+      <div class="feature-card">
+        <a href="#"><strong>Touch</strong><span>Screen</span></a>
+      </div>
+      <div class="feature-card">
+        <a href="#"><strong>Core i3</strong><span>Laptops</span></a>
+      </div>
+      <div class="feature-card">
+        <a href="#"><strong>Core i5</strong><span>Laptops</span></a>
+      </div>
+      <div class="feature-card">
+        <a href="#"><strong>Core i7</strong><span>Laptops</span></a>
+      </div>
+      <div class="feature-card">
+        <a href="#"><strong>Upcoming</strong><span>Laptops</span></a>
+      </div>
+    </div>
+  </div>
+<div class="container py-4">
+  <h3 class="mb-4">Upcoming Laptops</h3>
+
+  <!-- Laptop Item -->
+  <div class="laptop-card row align-items-center">
+    <div class="col-md-3 text-center">
+      <span class="tag-upcoming">UPCOMING</span>
+      <img src="{{ url_for('static', filename='laptop.jpg') }}" alt="Huawei MateBook Fold">
+    </div>
+    <div class="col-md-9">
+      <h5>Dell Fold Laptop (32GB/2TB SSD/HarmonyOS 5)</h5>
+      <p>⭐⭐⭐⭐☆ <span class="spec-score">61 Spec Score</span></p>
+      <p class="price">₹3,19,930</p>
+      <div class="actions mb-2">
+        <button class="btn btn-outline-primary btn-sm">+ Compare</button>
+        <button class="btn btn-outline-danger btn-sm">❤ Like</button>
+        <button class="btn btn-outline-dark btn-sm">🔍 Search</button>
+      </div>
+      <ul class="features-list row">
+        <li class="col-md-6">Kirin X90</li>
+        <li class="col-md-6">2 TB SSD</li>
+        <li class="col-md-6">10 Cores</li>
+        <li class="col-md-6">18” 3296x2472 Touch</li>
+        <li class="col-md-6">32 GB RAM</li>
+        <li class="col-md-6">1 Year Warranty</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Repeat this block for 8 laptops with different brands -->
+  <div class="laptop-card row align-items-center">
+    <div class="col-md-3 text-center">
+      <span class="tag-upcoming">UPCOMING</span>
+      <img src="{{ url_for('static', filename='lenovaa.jpg') }}"  alt="Lenovo ThinkPad">
+    </div>
+    <div class="col-md-9">
+      <h5>Lenovo ThinkPad X1 Carbon Gen 11 (16GB/1TB SSD/Win 11)</h5>
+      <p>⭐⭐⭐⭐⭐ <span class="spec-score">78 Spec Score</span></p>
+      <p class="price">₹2,45,000</p>
+      <div class="actions mb-2">
+        <button class="btn btn-outline-primary btn-sm">+ Compare</button>
+        <button class="btn btn-outline-danger btn-sm">❤ Like</button>
+        <button class="btn btn-outline-dark btn-sm">🔍 Search</button>
+      </div>
+      <ul class="features-list row">
+        <li class="col-md-6">Intel i9 13th Gen</li>
+        <li class="col-md-6">1 TB SSD</li>
+        <li class="col-md-6">16 GB RAM</li>
+        <li class="col-md-6">14” OLED Display</li>
+        <li class="col-md-6">Touch Screen</li>
+        <li class="col-md-6">3 Year Warranty</li>
+      </ul>
+    </div>
+  </div>
+  </div>  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<script>
+  function displayUser()
+  {
+    //alert(sessionStorage["uname"])
+    if(sessionStorage["uname"]==null)
+    {
+      location.href="http://localhost:5000/";
+    }
+    else{
+      document.getElementById("uname").innerHTML=sessionStorage["uname"];
+    }
+  }
+  function logout() {
+    sessionStorage.clear();
+    location.href="http://localhost:5000/login";
+  }
+</script>

@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>laptop</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    
+
+    .blue-navbar {
+      background-color: #007BFF;
+      
+    }
+    .hero {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+   }
+       body {
+        background-color: black;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/lap_back.jpg'); /* Path to the background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: white; /* Adjust text color for better contrast with the background image */
+        }
+         .aa {
+            width: 50%;
+            margin: auto;
+            overflow: hidden;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            color: black; /* Ensure good contrast with the background */
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+       
+
+  </style>
+</head>
+<body onload="displayUser();">
+
+  <!-- Black Navbar with Marquee -->
+ <section class="hero">
+  <div class="container">
+    <h1 class="display-4">Predict Laptop Prices with Ease</h1>
+    <p class="lead">Get an accurate estimate of a laptop's price using our smart ML model. Just enter specs like CPU, RAM, and Storage!</p>
+  </div>
+</section>
+
+  <!-- Blue Navigation Bar -->
+  <nav class="navbar navbar-expand-lg blue-navbar">
+    <div class="container-fluid">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/chome">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/index">PREDICT</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/contact">CONTACT</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-white" href="http://localhost:5000/messagelist">MESSAGE</a>
+        </li>
+        </ul>
+        <div class="row-0">
+        <div class="col-12"></div>
+        <div class="col-0">
+          <span class="h5" id="uname"></span>
+          <button class="btn btn-danger" type="submit" onclick="logout();">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+ 
+  <div class="aa">
+        <h1>Laptop Price Prediction</h1>
+        <form action="/predict" method="POST">
+            <!-- Brand -->
+            <label for="brand">Brand</label>
+            <select id="brand" name="brand">
+                {% for company in data_dict['company'] %}
+                <option value="{{ company }}">{{ company }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- TypeName -->
+            <label for="typename">Type Name</label>
+            <select id="typename" name="typename">
+                {% for type in data_dict['typename'] %}
+                <option value="{{ type }}">{{ type }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Ram -->
+            <label for="ram">RAM (GB)</label>
+            <select id="ram" name="ram">
+                {% for r in data_dict['ram'] %}
+                <option value="{{ r }}">{{ r }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Weight -->
+            <label for="weight">Weight (kg)</label>
+            <input type="text" id="weight" name="weight" placeholder="e.g., 1.5">
+
+            <!-- Touchscreen -->
+            <label for="touchscreen">Touchscreen</label>
+            <select id="touchscreen" name="touchscreen">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <!-- IPS -->
+            <label for="IPS">IPS Display</label>
+            <select id="IPS" name="IPS">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <!-- Screen Size -->
+            <label for="screen_size">Screen Size (inches)</label>
+            <input type="text" id="screen_size" name="screen_size" placeholder="e.g., 15.6">
+
+            <!-- Resolution -->
+            <label for="resolution">Screen Resolution</label>
+            <select id="resolution" name="resolution">
+                {% for res in data_dict['resolution'] %}
+                <option value="{{ res }}">{{ res }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- CPU -->
+            <label for="cpu">CPU Brand</label>
+            <select id="cpu" name="cpu">
+                {% for cpu in data_dict['cpubrand'] %}
+                <option value="{{ cpu }}">{{ cpu }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- SSD -->
+            <label for="ssd">SSD (GB)</label>
+            <select id="ssd" name="ssd">
+                {% for s in data_dict['ssd'] %}
+                <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- HDD -->
+            <label for="hdd">HDD (GB)</label>
+            <select id="hdd" name="hdd">
+                {% for h in data_dict['hdd'] %}
+                <option value="{{ h }}">{{ h }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- GPU -->
+            <label for="gpu">GPU Brand</label>
+            <select id="gpu" name="gpu">
+                {% for gpu in data_dict['Gpu_brand'] %}
+                <option value="{{ gpu }}">{{ gpu }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- OS -->
+            <label for="os">Operating System</label>
+            <select id="os" name="os">
+                {% for os in data_dict['os'] %}
+                <option value="{{ os }}">{{ os }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Submit Button -->
+            <input type="submit" value="Predict Price">
+        </form>
+
+        <!-- Uncomment the section below to display the predicted price on the same page -->
+        <!-- {% if data_dict['prediction'] != False %}
+        <h2>Predicted Price: ₹{{ data_dict['prediction'] }}</h2>
+        {% endif %} -->
+    </div>
+  </div>
+
+
+     <footer>
+    <div class="container" style="color: aliceblue;">
+      <p>&copy; 2025 Laptop Price Predictor | Designed by Sakshi Deshpande</p>
+    </div>
+  </footer>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<script>
+  function displayUser()
+  {
+   // alert(sessionStorage["uname"])
+    if(sessionStorage["uname"]==null)
+    {
+      location.href="http://localhost:5000/";
+    }
+    else{
+      document.getElementById("uname").innerHTML=sessionStorage["uname"];
+    }
+  }
+  function logout() {
+    sessionStorage.clear();
+    location.href="http://localhost:5000/login";
+  }
+</script>

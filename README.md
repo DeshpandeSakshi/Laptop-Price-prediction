@@ -1,9 +1,5 @@
 
----
 
-## ⭐ Option 3: ATS-Optimized (Recommended for Job Applications)
-
-```markdown
 # Laptop Price Prediction Using Machine Learning
 
 ## Description
